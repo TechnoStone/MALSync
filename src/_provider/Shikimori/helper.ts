@@ -239,3 +239,33 @@ export interface userRequestInterface {
   url: string;
   locale: string;
 }
+
+/**
+ * Fetch poster URLs for given Shikimori anime IDs using the GraphQL API.
+ * Returns a mapping of id -> { previewUrl?: string, preview2xUrl?: string }
+ */
+export async function getAnimesPosters(ids: number[] | string) {
+  const idsStr = Array.isArray(ids) ? ids.join(',') : String(ids);
+  const query = `{ animes(ids: "${idsStr}") { id poster { previewUrl preview2xUrl } } }`;
+
+  // Use apiCall to POST to the graphql endpoint. apiCall will handle auth header.
+  const res = await apiCall({
+    type: 'POST',
+    path: 'graphql',
+    dataObj: { query },
+  }).catch(err => {
+    // If GraphQL fails, just return empty mapping to allow fallbacks
+    return null;
+  });
+
+  const map: { [key: string]: { previewUrl?: string; preview2xUrl?: string } } = {};
+  if (!res || !res.data || !res.data.animes) return map;
+
+  for (const entry of res.data.animes) {
+    if (entry && entry.id) {
+      map[entry.id] = entry.poster || {};
+    }
+  }
+
+  return map;
+}
