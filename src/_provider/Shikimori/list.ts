@@ -100,12 +100,27 @@ export class UserList extends ListAbstract {
     }
 
     // Prefer GraphQL poster URLs by default; fall back to REST image fields
-    let posters: { [key: string]: { previewUrl?: string; preview2xUrl?: string } } = {};
-    try {
-      posters = await helper.getAnimesPosters(ids);
-    } catch (e) {
-      // ignore and use REST images as fallback
-      posters = {} as any;
+    const posters: { [key: string]: { previewUrl?: string; preview2xUrl?: string } } = {};
+    const userId = await helper.userId();
+    const userRatesPosters = await helper.getAnimesPostersByUserRates(
+      userId,
+      this.offset / pageSize + 1,
+      pageSize,
+    );
+    Object.assign(posters, userRatesPosters);
+
+    const missingIds = ids.filter(
+      id => !posters[id] || (!posters[id].previewUrl && !posters[id].preview2xUrl),
+    );
+
+    if (missingIds.length > 0) {
+      // Shikimori GraphQL `animes` query only returns 2 IDs at a time.
+      // Split missing IDs into chunks of 2 and fetch them.
+      for (let i = 0; i < missingIds.length; i += 2) {
+        const chunk = missingIds.slice(i, i + 2);
+        const chunkPosters = await helper.getAnimesPostersByIds(chunk);
+        Object.assign(posters, chunkPosters);
+      }
     }
 
     return this.prepareData(list, keyedMetadata, posters);
@@ -158,12 +173,12 @@ export class UserList extends ListAbstract {
         score: entry.score ? entry.score : 0,
         watchedEp: entry.target_type === 'Anime' ? entry.episodes : entry.chapters,
         readVol: entry.target_type === 'Anime' ? undefined : entry.volumes,
-        totalEp: entry.target_type === 'Anime' ? (meta ? meta.episodes : 0) : meta ? meta.chapters : 0,
-        totalVol: entry.target_type === 'Anime' ? undefined : meta ? meta.volumes : 0,
+        totalEp: entry.target_type === 'Anime' ? meta?.episodes || 0 : meta?.chapters || 0,
+        totalVol: entry.target_type === 'Anime' ? undefined : meta?.volumes || 0,
         status: helper.statusTranslate[entry.status],
         rewatchCount: entry.rewatches,
         image: imagePreview,
-        imageLarge: imageLarge,
+        imageLarge,
         tags: entry.text,
       });
       newData.push(tempData);

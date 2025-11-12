@@ -1,6 +1,7 @@
 import { NotAutenticatedError, NotFoundError, ServerOfflineError } from '../Errors';
 import { status } from '../definitions';
 import { Cache } from '../../utils/Cache';
+import { shikimoriRateLimiter } from './rateLimiter';
 
 const clientId = 'z3NJ84kK9iy5NU6SnhdCDB38rr4-jFIJ67bMIUDzdoo';
 
@@ -17,6 +18,12 @@ export async function apiCall(options: {
   dataObj?: { [key: string]: any };
   auth?: boolean;
 }) {
+  // Acquire a slot from the rate limiter before making the API call
+  if (!options.auth) {
+    // Don't rate limit auth requests
+    await shikimoriRateLimiter.acquire();
+  }
+
   const type = options.type || 'GET';
   const token = api.settings.get('shikiToken');
 
@@ -244,7 +251,7 @@ export interface userRequestInterface {
  * Fetch poster URLs for given Shikimori anime IDs using the GraphQL API.
  * Returns a mapping of id -> { previewUrl?: string, preview2xUrl?: string }
  */
-export async function getAnimesPosters(ids: number[] | string) {
+export async function getAnimesPostersByIds(ids: number[] | string) {
   const idsStr = Array.isArray(ids) ? ids.join(',') : String(ids);
   const query = `{ animes(ids: "${idsStr}") { id poster { previewUrl preview2xUrl } } }`;
 
@@ -261,11 +268,54 @@ export async function getAnimesPosters(ids: number[] | string) {
   const map: { [key: string]: { previewUrl?: string; preview2xUrl?: string } } = {};
   if (!res || !res.data || !res.data.animes) return map;
 
-  for (const entry of res.data.animes) {
+  res.data.animes.forEach((entry: any) => {
     if (entry && entry.id) {
       map[entry.id] = entry.poster || {};
     }
-  }
+  });
+
+  return map;
+}
+
+export async function getAnimesPostersByUserRates(userId: number, page: number, limit: number) {
+  const query = `
+    {
+      userRates(
+        userId: ${userId}
+        page: ${page}
+        limit: ${limit}
+        targetType: Anime
+        status: watching
+        order: { field: updated_at, order: desc }
+      ) {
+        id
+        anime {
+          id
+          poster {
+            previewUrl
+            preview2xUrl
+          }
+        }
+      }
+    }
+  `;
+
+  const res = await apiCall({
+    type: 'POST',
+    path: 'graphql',
+    dataObj: { query },
+  }).catch(err => {
+    return null;
+  });
+
+  const map: { [key: string]: { previewUrl?: string; preview2xUrl?: string } } = {};
+  if (!res || !res.data || !res.data.userRates) return map;
+
+  res.data.userRates.forEach((entry: any) => {
+    if (entry && entry.anime && entry.anime.id) {
+      map[entry.anime.id] = entry.anime.poster || {};
+    }
+  });
 
   return map;
 }
