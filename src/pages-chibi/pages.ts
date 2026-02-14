@@ -15,6 +15,7 @@ import { bato } from './implementations/bato/main';
 import { Crunchyroll } from './implementations/Crunchyroll/main';
 import { animevost } from './implementations/animevost/main';
 import { AnimeKAI } from './implementations/AnimeKAI/main';
+import { FireAnime } from './implementations/FireAnime/main';
 import { WeebCentral } from './implementations/WeebCentral/main';
 import { MangaDemon } from './implementations/MangaDemon/main';
 import { RoliaScan } from './implementations/RoliaScan/main';
@@ -55,10 +56,10 @@ import { Jestful } from './implementations/Jestful/main';
 import { AnimeNoSub } from './implementations/AnimeNoSub/main';
 import { Rawkuma } from './implementations/Rawkuma/main';
 import { KakuseiProject } from './implementations/KakuseiProject/main';
+import { Anoboye } from './implementations/Anoboye/main';
 import { AnimeKhor } from './implementations/AnimeKhor/main';
 import { TCBScans } from './implementations/TCBScans/main';
 import { Mangapill } from './implementations/Mangapill/main';
-import { Armageddon } from './implementations/Armageddon/main';
 import { Silentquill } from './implementations/Silentquill/main';
 import { ComicDays } from './implementations/ComicDays/main';
 import { MangaPlus } from './implementations/MangaPlus/main';
@@ -73,9 +74,24 @@ import { VioletScans } from './implementations/VioletScans/main';
 import { animepahe } from './implementations/animepahe/main';
 import { AnimeHeaven } from './implementations/AnimeHeaven/main';
 import { Ritharscans } from './implementations/Ritharscans/main';
+import { BStation } from './implementations/Bstation/main';
 import { FalconScans } from './implementations/FalconScans/main';
 import { MangaSushi } from './implementations/MangaSushi/main';
 import { Comix } from './implementations/Comix/main';
+import { DynastyScans } from './implementations/DynastyScans/main';
+import { LagoonScans } from './implementations/LagoonScans/main';
+import { WeebDex } from './implementations/WeebDex/main';
+import { SetsuScans } from './implementations/SetsuScans/main';
+import { Mgeko } from './implementations/Mgeko/main';
+import { LuaScans } from './implementations/LuaScans/main';
+import { KaynScan } from './implementations/KaynScan/main';
+import { ComicWalker } from './implementations/ComicWalker/main';
+import { MangaLivreTV } from './implementations/MangaLivreTV/main';
+import { SanaScans } from './implementations/SanaScans/main';
+import { RezoScans } from './implementations/RezoScans/main';
+import { RageScans } from './implementations/RageScans/main';
+import { AniGo } from './implementations/AniGo/main';
+import { Kuudere } from './implementations/Kuudere/main';
 
 export const pages: { [key: string]: PageInterface } = {
   animeav1,
@@ -93,6 +109,7 @@ export const pages: { [key: string]: PageInterface } = {
   Crunchyroll,
   animevost,
   AnimeKAI,
+  FireAnime,
   WeebCentral,
   MangaDemon,
   RoliaScan,
@@ -134,10 +151,10 @@ export const pages: { [key: string]: PageInterface } = {
   AnimeNoSub,
   Rawkuma,
   KakuseiProject,
+  Anoboye,
   AnimeKhor,
   TCBScans,
   Mangapill,
-  Armageddon,
   Silentquill,
   ComicDays,
   MangaPlus,
@@ -151,7 +168,22 @@ export const pages: { [key: string]: PageInterface } = {
   animepahe,
   AnimeHeaven,
   Ritharscans,
+  BStation,
   FalconScans,
   MangaSushi,
   Comix,
+  DynastyScans,
+  LagoonScans,
+  WeebDex,
+  SetsuScans,
+  Mgeko,
+  LuaScans,
+  KaynScan,
+  ComicWalker,
+  MangaLivreTV,
+  SanaScans,
+  RezoScans,
+  RageScans,
+  AniGo,
+  Kuudere,
 };

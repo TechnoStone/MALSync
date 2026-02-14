@@ -6,7 +6,6 @@ import { Netflix } from './Netflix/main';
 import { Animeflv } from './Animeflv/main';
 import { Jkanime } from './Jkanime/main';
 import { Proxer } from './Proxer/main';
-import { Aniflix } from './Aniflix/main';
 import { KickAssAnime } from './KickAssAnime/main';
 import { Shinden } from './Shinden/main';
 import { Voiranime } from './Voiranime/main';
@@ -16,7 +15,6 @@ import { AnimeOdcinki } from './AnimeOdcinki/main';
 import { serimanga } from './serimanga/main';
 import { mangadenizi } from './mangadenizi/main';
 import { moeclip } from './moeclip/main';
-import { mangalivre } from './mangalivre/main';
 import { tmofans } from './tmofans/main';
 import { JapScan } from './JapScan/main';
 import { Hulu } from './Hulu/main';
@@ -31,7 +29,6 @@ import { OtakuFR } from './OtakuFR/main';
 import { mangatx } from './mangatx/main';
 import { manhuafast } from './manhuafast/main';
 import { TRanimeizle } from './TRanimeizle/main';
-import { AnimeStreamingFR } from './AnimeStreamingFR/main';
 import { Furyosociety } from './Furyosociety/main';
 import { AnimeId } from './AnimeId/main';
 import { MyAnimeListVideo } from './MyAnimeListVideo/main';
@@ -67,7 +64,6 @@ import { LHTranslation } from './LHTranslation/main';
 import { MangasOrigines } from './MangasOrigines/main';
 import { BlueSolo } from './BlueSolo/main';
 import { DisasterScans } from './DisasterScans/main';
-import { DynastyScans } from './DynastyScans/main';
 import { Aniworld } from './Aniworld/main';
 import { BetterAnime } from './BetterAnime/main';
 import { BilibiliComics } from './BilibiliComics/main';
@@ -119,7 +115,6 @@ export const pages = {
   Proxer,
   Emby,
   Plex,
-  Aniflix,
   KickAssAnime,
   Shinden,
   Voiranime,
@@ -129,7 +124,6 @@ export const pages = {
   serimanga,
   mangadenizi,
   moeclip,
-  mangalivre,
   tmofans,
   JapScan,
   Hulu,
@@ -144,7 +138,6 @@ export const pages = {
   mangatx,
   manhuafast,
   TRanimeizle,
-  AnimeStreamingFR,
   Furyosociety,
   AnimeId,
   MyAnimeListVideo,
@@ -180,7 +173,6 @@ export const pages = {
   MangasOrigines,
   BlueSolo,
   DisasterScans,
-  DynastyScans,
   Aniworld,
   BetterAnime,
   BilibiliComics,
