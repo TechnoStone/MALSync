@@ -59,7 +59,7 @@ describe('Sync Handling', function() {
       expect(sync.getType('https://simkl.com/anime/46128/no-game-no-life')).to.equal('SIMKL');
     });
     it('Shiki', function() {
-      expect(sync.getType('https://shikimori.one/animes/z19815-no-game-no-life')).to.equal('SHIKI');
+      expect(sync.getType('https://shikimori.rip/animes/z19815-no-game-no-life')).to.equal('SHIKI');
     });
     it('Random', function() {
       expect(() => sync.getType('Random')).to.throw();

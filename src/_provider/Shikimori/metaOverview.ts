@@ -7,7 +7,7 @@ export class MetaOverview extends MetaOverviewAbstract {
   constructor(url) {
     super(url);
     this.logger = this.logger.m('Shiki');
-    if (url.match(/shikimori\.one\/(animes|mangas|ranobe)\/\D?\d+/i)) {
+    if (url.match(/shikimori\.(one|rip)\/(animes|mangas|ranobe)\/\D?\d+/i)) {
       this.type = utils.urlPart(url, 3) === 'animes' ? 'anime' : 'manga';
       const res = utils.urlPart(url, 4).match(/^\D?(\d+)/);
       if (res && res[1]) {
@@ -244,7 +244,7 @@ export class MetaOverview extends MetaOverviewAbstract {
       data.meta.studios.forEach(i => {
         studios.push({
           text: i.name,
-          url: `https://shikimori.one/animes/studio/${i.id}`,
+          url: `https://shikimori.rip/animes/studio/${i.id}`,
         });
       });
 
@@ -259,7 +259,7 @@ export class MetaOverview extends MetaOverviewAbstract {
     data.meta.genres.forEach(i => {
       genres.push({
         text: i.name,
-        url: `https://shikimori.one/${this.type}s/genre/${i.id}`,
+        url: `https://shikimori.rip/${this.type}s/genre/${i.id}`,
       });
     });
     if (genres.length)

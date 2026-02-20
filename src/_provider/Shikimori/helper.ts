@@ -2,13 +2,13 @@ import { NotAutenticatedError, NotFoundError, ServerOfflineError } from '../Erro
 import { status } from '../definitions';
 import { Cache } from '../../utils/Cache';
 
-const clientId = 'z3NJ84kK9iy5NU6SnhdCDB38rr4-jFIJ67bMIUDzdoo';
+const clientId = 'FhOhm33mixJiYTG4SGcbeyvEx1SbVEutYyyjzMxxHng';
 
-export const authUrl = `https://shikimori.one/oauth/authorize?client_id=${clientId}&redirect_uri=https%3A%2F%2Fmalsync.moe%2Fshikimori%2Foauth&response_type=code&scope=user_rates`;
+export const authUrl = `https://shikimori.rip/oauth/authorize?client_id=${clientId}&redirect_uri=https%3A%2F%2Fmalsync.moe%2Fshikimori%2Foauth&response_type=code&scope=user_rates`;
 
-const apiDomain = 'https://shikimori.one/api/';
+const apiDomain = 'https://shikimori.rip/api/';
 
-export const domain = 'https://shikimori.one';
+export const domain = 'https://shikimori.rip';
 
 export async function apiCall(options: {
   type: 'GET' | 'PUT' | 'DELETE' | 'POST';
@@ -47,7 +47,7 @@ export async function apiCall(options: {
 
   if (options.auth) {
     delete headers.Authorization;
-    url = 'https://shikimori.one/oauth/token';
+    url = 'https://shikimori.rip/oauth/token';
   }
 
   return api.request
@@ -100,7 +100,7 @@ export async function apiCall(options: {
 export function authRequest(data: { code: string } | { refresh_token: string }) {
   const dataObj: any = {
     client_id: clientId,
-    client_secret: '6vkFaJN_wxQHmBoq23ac1z6tZKiAD7xqsXGudkkOqTg',
+    client_secret: 'XVsSY0o39tSjR-Q7d5Nz_Hq9Bm6Ai0N7MKhVA79IWjE',
     redirect_uri: 'https://malsync.moe/shikimori/oauth',
   };
 

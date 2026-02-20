@@ -39,6 +39,7 @@ export function getType(url) {
   if (utils.isDomainMatching(url, 'myanimelist.net')) return 'MAL';
   if (utils.isDomainMatching(url, 'simkl.com')) return 'SIMKL';
   if (utils.isDomainMatching(url, 'shikimori.one')) return 'SHIKI';
+  if (utils.isDomainMatching(url, 'shikimori.rip')) return 'SHIKI';
   throw 'Type not found';
 }
 
